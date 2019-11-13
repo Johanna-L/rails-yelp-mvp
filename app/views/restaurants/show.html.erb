@@ -1,0 +1,29 @@
+<div class="container col-6 text-center mt-3">
+  <h1><%= @restaurant.name %></h1>
+  <h3><%= @restaurant.category.capitalize %></h3>
+  <br>
+  <p><%= @restaurant.address %></p>
+  <p><%= @restaurant.phone_number %></p>
+  <% if @reviews.length > 0 %>
+    <h3 class="mt-5"><%= "Reviews" %></h3>
+    <ul class="list-group"><% @reviews.each do |review| %>
+      <li class="list-group-item text-left">
+        <%= review.content.capitalize %>
+        <%= '⭐' * review.rating %>
+      </li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="container col-6 text-center mt-5">
+    <h3>New review</h1>
+    <%= simple_form_for [@restaurant, @review] do |f| %>
+      <%= f.input :rating %>
+      <%= f.input :content %>
+      <%= f.submit class:'btn btn-primary mt-2 mb-3'%>
+    <% end %>
+  </div>
+
+  <%= link_to 'Back to list', restaurants_path, class:'btn btn-primary' %>
+
+</div>
